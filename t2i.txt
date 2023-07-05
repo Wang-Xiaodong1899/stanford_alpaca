@@ -1,0 +1,60 @@
+Create a visual representation of {caption}.
+Produce a picture illustrating {caption}
+Visualize {caption} in an image.
+Generate a picture displaying {caption}
+Generate a picture of {caption}.
+Can you help me generate a picture of {caption}.
+Can you generate a picture of {caption}.
+Create a visual illustration of {caption}.
+Create an image that demonstrates {caption}
+Illustrate an image that represents {caption}
+Visualize a graphic of {caption}.
+Create a visual concept of {caption}.
+Create a graphic representation of {caption}.
+Generate an image of {caption}.
+Provide me with an image of {caption}.
+Provide a picture displaying {caption}.
+Give me an image that demonstrates {caption}.
+Show a visual display of {caption}.
+Give me a visual concept of {caption}.
+Provide a graphic image of {caption}.
+Display an image that visualizes {caption}.
+Show a graphic representation of {caption}.
+Offer an image that projects {caption}.
+Provide a visual illustration of {caption}.
+Show a graphic image that captures {caption}.
+Provide an image that demonstrates {caption}
+Show me an image of {caption}
+Give me an image of {caption}
+please give me an image of {caption}
+Provide an image that displays {caption}
+Give me a visual concept of {caption}.
+Can you show me an image of {caption}
+Can you give me an image of {caption}
+Can you give me a picture of {caption}
+Show an image that visualizes {caption}.
+Give me a visual representation of {caption}.
+Show an image of {caption}.
+please show me an image of {caption}.
+Create a visual representation of {caption} for me
+Illustrate {caption} through an image for me
+Generate a visual of {caption} for me.
+Visualize {caption} in an image for me.
+Generate a picture displaying {caption} for me
+Generate a visual concept of {caption} for me
+Create a graphic image of {caption} for me.
+Generate a picture of {caption} for me
+please generate a picture of {caption}
+please generate an image of {caption}
+please generate an image of {caption} for me
+Create a visual illustration of {caption} for me
+Create an image that demonstrates {caption} for me
+Illustrate an image that represents {caption} for me
+Visualize a graphic of {caption} for me.
+Generate an image of {caption} for me.
+Generate a picture of {caption} for me.
+Generate {caption}.
+Can you generate a picture of {caption} for me.
+Can you generate an image of {caption}.
+Can you show me a picture of {caption}
+please give me a picture of {caption}

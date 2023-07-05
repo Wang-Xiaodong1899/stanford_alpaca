@@ -210,6 +210,27 @@ If you'd like to further reduce the memory footprint, here are some options:
         --deepspeed "./configs/default_offload_opt_param.json" \
         --tf32 True
     ```
+New command:
+```
+CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node=1 --master_port=23456 train.py \
+--data_path ./alpaca_data.json \
+--fp16 True \
+--output_dir /f_data/G/alpaca_vicuna_test \
+--num_train_epochs 3 \
+--per_device_train_batch_size 1 \
+--per_device_eval_batch_size 1 \
+--gradient_accumulation_steps 1 \
+--evaluation_strategy "no" \
+--save_strategy "steps" \
+--save_steps 2000 \
+--save_total_limit 1 \
+--learning_rate 2e-5 \
+--weight_decay 0. \
+--warmup_ratio 0.03 \
+--deepspeed "./configs/default_offload_opt_param.json" \
+--tf32 False
+```
+
   - The DeepSpeed library also provides some [helpful functions](https://deepspeed.readthedocs.io/en/latest/memory.html) to estimate memory usage. 
 - [LoRA](https://arxiv.org/abs/2106.09685) fine-tunes low-rank slices of the query, key, and value embedding heads. This can reduce the total memory footprint from 112GB to about 7x4=28GB. We may release our re-implemention of this in the future, but for now the [peft](https://github.com/huggingface/peft) codebase can be a useful resource.
 

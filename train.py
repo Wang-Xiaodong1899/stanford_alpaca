@@ -23,6 +23,8 @@ import utils
 from torch.utils.data import Dataset
 from transformers import Trainer
 
+from utils import *
+
 IGNORE_INDEX = -100
 DEFAULT_PAD_TOKEN = "[PAD]"
 DEFAULT_EOS_TOKEN = "</s>"
@@ -130,6 +132,50 @@ class SupervisedDataset(Dataset):
     def __init__(self, data_path: str, tokenizer: transformers.PreTrainedTokenizer):
         super(SupervisedDataset, self).__init__()
         logging.warning("Loading data...")
+        list_data_dict = utils.jload(data_path)
+
+        logging.warning("Formatting inputs...")
+        prompt_input, prompt_no_input = PROMPT_DICT["prompt_input"], PROMPT_DICT["prompt_no_input"]
+        sources = [
+            prompt_input.format_map(example) if example.get("input", "") != "" else prompt_no_input.format_map(example)
+            for example in list_data_dict
+        ]
+        targets = [f"{example['output']}{tokenizer.eos_token}" for example in list_data_dict]
+
+        logging.warning("Tokenizing inputs... This may take some time...")
+        data_dict = preprocess(sources, targets, tokenizer)
+
+        self.input_ids = data_dict["input_ids"]
+        self.labels = data_dict["labels"]
+
+    def __len__(self):
+        return len(self.input_ids)
+
+    def __getitem__(self, i) -> Dict[str, torch.Tensor]:
+        return dict(input_ids=self.input_ids[i], labels=self.labels[i])
+from torchvision import transforms
+
+class SupervisedDataset_coco(Dataset):
+    """Dataset for supervised fine-tuning."""
+
+    def __init__(self, data_path: str, tokenizer: transformers.PreTrainedTokenizer):
+        super(SupervisedDataset, self).__init__()
+        logging.warning("Loading data...")
+        self.basic_root_dir = '/f_data/G'
+        
+        # for image data
+        self.data = file2data(os.path.join(self.basic_root_dir, 'dataset/mscoco/train_data.json'))
+        self.root = os.path.join(self.basic_root_dir, 'dataset/mscoco/train2017')
+        self.transform = transforms.Compose([
+            transforms.RandomResizedCrop(128, scale=(0.7, 1.), ratio=(1., 1.)),
+            transforms.RandomHorizontalFlip(p=0.1),
+            transforms.ColorJitter(brightness=0.05, contrast=0.15, saturation=0.15),
+            transforms.ToTensor(),
+            transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5]),
+        ])
+        image_generation_query_template = open('./t2i.txt', "r", encoding='utf-8')
+        self.image_generation_prompt_list = [str(prefix).strip() for prefix in image_generation_query_template.readlines()]
+            
         list_data_dict = utils.jload(data_path)
 
         logging.warning("Formatting inputs...")

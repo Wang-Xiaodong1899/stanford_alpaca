@@ -1,0 +1,22 @@
+# For V100 train 7B
+torchrun --nproc_per_node=8 --master_port=9776 train.py
+--model_name_or_path hf_model/llama-7b
+--data_path ./alpaca_data.json
+--bf16 False
+--output_dir ./finetuned_4/
+--num_train_epochs 3
+--per_device_train_batch_size 3
+--per_device_eval_batch_size 3
+--gradient_accumulation_steps 5
+--evaluation_strategy "no"
+--save_strategy "steps"
+--save_steps 1200
+--save_total_limit 2
+--learning_rate 2e-5
+--weight_decay 0.
+--warmup_ratio 0.03
+--lr_scheduler_type "cosine"
+--logging_steps 1
+--deepspeed ds_config.json
+--fp16
+--tf32 False \

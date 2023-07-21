@@ -230,12 +230,12 @@ def train():
     model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
     model = transformers.AutoModelForCausalLM.from_pretrained(
-        '/f_data/G/llama/vicuna_7B_v11/',
+        '/f_data/G/llama/llama-7b-hf/',
         cache_dir=training_args.cache_dir,
     )
 
     tokenizer = transformers.AutoTokenizer.from_pretrained(
-        '/f_data/G/llama/vicuna_7B_v11/',
+        '/f_data/G/llama/llama-7b-hf/',
         cache_dir=training_args.cache_dir,
         model_max_length=training_args.model_max_length,
         padding_side="right",
